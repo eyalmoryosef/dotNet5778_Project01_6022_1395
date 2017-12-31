@@ -5,3 +5,10 @@ C:\Users\אייל עבושה\Desktop\dotNet5778_Project01_6022_1395\DS\bin\Debug
 C:\Users\אייל עבושה\Desktop\dotNet5778_Project01_6022_1395\DS\obj\Debug\DS.csprojResolveAssemblyReference.cache
 C:\Users\אייל עבושה\Desktop\dotNet5778_Project01_6022_1395\DS\obj\Debug\DS.dll
 C:\Users\אייל עבושה\Desktop\dotNet5778_Project01_6022_1395\DS\obj\Debug\DS.pdb
+C:\Users\drakovsk\Source\Repos\DS\bin\Debug\DS.dll
+C:\Users\drakovsk\Source\Repos\DS\bin\Debug\DS.pdb
+C:\Users\drakovsk\Source\Repos\DS\bin\Debug\BE.dll
+C:\Users\drakovsk\Source\Repos\DS\bin\Debug\BE.pdb
+C:\Users\drakovsk\Source\Repos\DS\obj\Debug\DS.csprojResolveAssemblyReference.cache
+C:\Users\drakovsk\Source\Repos\DS\obj\Debug\DS.dll
+C:\Users\drakovsk\Source\Repos\DS\obj\Debug\DS.pdb

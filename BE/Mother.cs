@@ -155,7 +155,7 @@ namespace BE
             get { return HoursOfNeedingNanny; }
             set
             {
-                if (value.GetLength(0) != 6 || value.GetLength(2) != 2)
+                if (value.GetLength(0) != 6 || value.GetLength(1) != 2)
                     throw new ArgumentException("The array is not of the appropriate size (6,2)");
                 HoursOfNeedingNanny = value;
             }
