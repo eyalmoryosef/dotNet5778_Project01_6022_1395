@@ -84,42 +84,86 @@ namespace DAL
 
         public List<Child> GetAllChild()
         {
-            throw new NotImplementedException();
+            return DataSource.ChildList;
         }
 
         public List<Contract> GetAllContract()
         {
-            throw new NotImplementedException();
+            return DataSource.ContractList;
         }
 
         public List<Mother> GetAllMother()
         {
-            throw new NotImplementedException();
+            return DataSource.MotherList;
         }
 
         public List<Nanny> GetAllNanny()
         {
-            throw new NotImplementedException();
+            return DataSource.NannyList;
         }
 
         public void updatingChild(Child child)
         {
-            throw new NotImplementedException();
+            Child old_child;
+            try { old_child = getChild(child.ID); }
+            catch (Exception ex)
+            {
+                throw new KeyNotFoundException("The child doesn't exist and therefore can't be updated");
+            }
+
+            if (old_child.MotherID != child.MotherID)
+                throw new ArgumentException("It's not possible to update the Mother's ID of an existing child");
+
+            if (old_child.DateOfBirth != child.DateOfBirth)
+                throw new ArgumentException("It's not possible to update the date of birth of an existing child");
+
+            deleteChild(old_child);
+            addChild(child);
         }
 
         public void updatingContract(Contract contract)
         {
-            throw new NotImplementedException();
+            Contract old_contract;
+            try { old_contract = getContract(contract.ChildID); }
+            catch (Exception ex)
+            {
+                throw new KeyNotFoundException("The contract doesn't exist and therefore can't be updated");
+            }
+
+            if (old_contract.NannyID != contract.NannyID)
+                throw new ArgumentException("It's not possible to update the Nanny's ID of an existing contract");
+
+            deleteContract(old_contract);
+            addContract(contract);
         }
 
         public void updatingMother(Mother mother)
         {
-            throw new NotImplementedException();
+            Mother old_mother;
+            try { old_mother = getMother(mother.ID); }
+            catch (Exception ex)
+            {
+                throw new KeyNotFoundException("The mother doesn't exist and therefore can't be updated");
+            }
+
+            deleteMother(old_mother);
+            addMother(mother);
         }
 
         public void updatingNanny(Nanny nanny)
         {
-            throw new NotImplementedException();
+            Nanny old_nanny;
+            try { old_nanny = getNanny(nanny.ID); }
+            catch (Exception ex)
+            {
+                throw new KeyNotFoundException("The nanny doesn't exist and therefore can't be updated");
+            }
+
+            if (old_nanny.DateOfBirth != nanny.DateOfBirth)
+                throw new ArgumentException("It's not possible to update the date of birth of an existing nanny");
+
+            deleteNanny(old_nanny);
+            addNanny(nanny);
         }
 
         private bool idExist(int id)
@@ -131,7 +175,7 @@ namespace DAL
             }
             return false;
         }
-        public Mother getMom(int id)
+        public Mother getMother(int id)
         {
             return DataSource.MotherList.Find(m => m.ID == id);
         }
@@ -147,10 +191,9 @@ namespace DAL
         {
             return DataSource.ContractList.Find(c => c.ChildID == id);
         }
-        public bool ContractExsit(int id)
+        public bool ContractExists(int id)
         {
-           return DataSource.ContractList.Exists(c => c.ChildID == id);
-
+            return DataSource.ContractList.Exists(c => c.ChildID == id);
         }
     }
 }

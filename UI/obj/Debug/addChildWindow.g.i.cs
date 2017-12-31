@@ -112,6 +112,14 @@ namespace UI
             }
             this._contentLoaded = true;
         }
+
+        internal System.Windows.Controls.Grid grid1;
+        internal System.Windows.Controls.DatePicker dateOfBirthDatePicker;
+        internal System.Windows.Controls.TextBox firstNameTextBox;
+        internal System.Windows.Controls.TextBox iDTextBox;
+        internal System.Windows.Controls.TextBox motherIDTextBox;
+        internal System.Windows.Controls.CheckBox specialNeedsCheckBox;
+        internal System.Windows.Controls.TextBox theSpecialNeedsTextBox;
     }
 }
 
