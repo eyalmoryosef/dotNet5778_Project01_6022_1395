@@ -21,7 +21,15 @@ namespace BL
         #region add "item" function
         public void addChild(Child child)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dal.addChild(child);
+            }
+            catch (DuplicateWaitObjectException ex)
+            {
+
+                throw new DuplicateWaitObjectException(ex.Message);
+            }
         }
         public void addContract(Contract contract)
         {
@@ -49,23 +57,42 @@ namespace BL
             {
                 dal.addContract(contract);
             }
-            catch (Exception e)
+            catch (DuplicateWaitObjectException e)
             {
-                throw new Exception(e.Message);
+                throw new DuplicateWaitObjectException(e.Message);
             }
         }
-
         public void addMother(Mother mother)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                dal.addMother(mother);
+            }
+            catch (DuplicateWaitObjectException ex)
+            {
 
+                throw new DuplicateWaitObjectException(ex.Message);
+            }
+        }
         public void addNanny(Nanny nanny)
         {
             if (DateTime.Now.Year - nanny.DateOfBirth.Year < 18)
                 throw new Exception("Nanny's age is less than 18");
-            else dal.addNanny(nanny);
+            else
+            {
+                try
+                {
+                    dal.addNanny(nanny);
+                }
+                catch (DuplicateWaitObjectException ex)
+                {
 
+                    throw new DuplicateWaitObjectException(ex.Message);
+                }
+
+
+
+            }
         }
         #endregion
         #region delate "item"  function
@@ -125,43 +152,79 @@ namespace BL
         #region get list of "item" function
         public List<Child> GetAllChild()
         {
-            throw new NotImplementedException();
+            return dal.GetAllChild();
         }
 
         public List<Contract> GetAllContract()
         {
-            throw new NotImplementedException();
+            return dal.GetAllContract();
         }
 
         public List<Mother> GetAllMother()
         {
-            throw new NotImplementedException();
+            return dal.GetAllMother();
         }
 
         public List<Nanny> GetAllNanny()
         {
-            throw new NotImplementedException();
+            return dal.GetAllNanny();
         }
         #endregion
         #region update "item" function
         public void updatingChild(Child child)
         {
-            throw new NotImplementedException();
+            try
+            {
+             dal.updatingChild(child);
+            }
+            catch (KeyNotFoundException ex)
+            {
+
+                throw new KeyNotFoundException(ex.Message);
+            }
+           
         }
 
         public void updatingContract(Contract contract)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dal.updatingContract(contract);
+            }
+            catch (KeyNotFoundException ex)
+            {
+
+                throw new KeyNotFoundException(ex.Message);
+            }
+
         }
 
         public void updatingMother(Mother mother)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dal.updatingMother(mother);
+            }
+            catch (KeyNotFoundException ex)
+            {
+
+                throw new KeyNotFoundException(ex.Message);
+            }
+
         }
 
         public void updatingNanny(Nanny nanny)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dal.updatingNanny(nanny);
+            }
+            catch (KeyNotFoundException ex)
+            {
+
+                throw new KeyNotFoundException(ex.Message);
+            }
+
         }
         #endregion
         /// <summary>
@@ -178,7 +241,7 @@ namespace BL
                 bool match = true;
                 for (int i = 0; i < 6 && match; i++)
                     // if mother need nanny & nanny is work - nanny is not match
-                    if (mother.DaysOfNeedingNanny[i] == true && n.WorkDays[i] == true) 
+                    if (mother.DaysOfNeedingNanny[i] == true && n.WorkDays[i] == true)
                         match = false;
                 if (match) // nanny isnt work when mother need a nnany
                 {

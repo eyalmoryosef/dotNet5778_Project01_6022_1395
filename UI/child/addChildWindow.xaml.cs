@@ -19,9 +19,15 @@ namespace UI
     /// </summary>
     public partial class addChildWindow : Window
     {
+        BE.Child child;
+        BL.IBL bl;
         public addChildWindow()
         {
             InitializeComponent();
+         
+            child = new BE.Child();
+            this.DataContext = child;
+            bl = new BL.FactoryBL.GetBL();
         }
 
     

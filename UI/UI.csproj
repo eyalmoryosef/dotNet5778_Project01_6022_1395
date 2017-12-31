@@ -58,11 +58,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="addChildWindow.xaml">
+    <Page Include="child\addChildWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="addNannyWindow.xaml">
+    <Page Include="nanny\addNannyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -70,10 +70,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="addChildWindow.xaml.cs">
+    <Compile Include="child\addChildWindow.xaml.cs">
       <DependentUpon>addChildWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="addNannyWindow.xaml.cs">
+    <Compile Include="nanny\addNannyWindow.xaml.cs">
       <DependentUpon>addNannyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
@@ -84,20 +84,20 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="motherWindow.xaml">
+    <Page Include="mother\motherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="nannyWindow.xaml">
+    <Page Include="nanny\nannyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="motherWindow.xaml.cs">
+    <Compile Include="mother\motherWindow.xaml.cs">
       <DependentUpon>motherWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="nannyWindow.xaml.cs">
+    <Compile Include="nanny\nannyWindow.xaml.cs">
       <DependentUpon>nannyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -138,6 +138,9 @@
       <Project>{59365490-c726-4591-a87e-800c094e2ad7}</Project>
       <Name>BL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="contract\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

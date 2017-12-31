@@ -8,11 +8,16 @@ namespace BL
 {
     public class FactoryBL
     {
-        public static IBL bl = null;
-        public IBL GetBL()
+        static IBL bl = null;
+        public static IBL GetBL()
         {
-            bl = new BL();
+            if (bl == null)
+                bl = new BL();
             return bl;
+        }
+        public int distance()
+        {
+            return 0;
         }
     }
 }
