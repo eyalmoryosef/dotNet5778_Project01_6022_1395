@@ -58,6 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="addChildWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="addNannyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -66,6 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="addChildWindow.xaml.cs">
+      <DependentUpon>addChildWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="addNannyWindow.xaml.cs">
       <DependentUpon>addNannyWindow.xaml</DependentUpon>
     </Compile>

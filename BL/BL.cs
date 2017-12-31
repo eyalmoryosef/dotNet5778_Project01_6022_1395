@@ -18,7 +18,7 @@ namespace BL
         //{
         //    dal = new DAL.init_dal.init();
         //}
-
+        #region add "item" function
         public void addChild(Child child)
         {
             throw new NotImplementedException();
@@ -67,32 +67,62 @@ namespace BL
             else dal.addNanny(nanny);
 
         }
-
+        #endregion
+        #region delate "item"  function
         public void deleteChild(Child child)
         {
-            //    foreach (var c in GetAllContract())
-            //    {
-            //        if (c.ChildID == child.ID)
-            //            GetAllContract().Remove(c);
-            //    }
+            try
+            {
+                dal.deleteChild(child);
+            }
+
+            catch (KeyNotFoundException ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
         }
 
         public void deleteContract(Contract contract)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dal.deleteContract(contract);
+            }
+
+            catch (KeyNotFoundException ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void deleteMother(Mother mother)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dal.deleteMother(mother);
+            }
+
+            catch (KeyNotFoundException ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void deleteNanny(Nanny nanny)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                dal.deleteNanny(nanny);
+            }
 
+            catch (KeyNotFoundException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        #endregion
+        #region get list of "item" function
         public List<Child> GetAllChild()
         {
             throw new NotImplementedException();
@@ -112,7 +142,8 @@ namespace BL
         {
             throw new NotImplementedException();
         }
-
+        #endregion
+        #region update "item" function
         public void updatingChild(Child child)
         {
             throw new NotImplementedException();
@@ -132,34 +163,48 @@ namespace BL
         {
             throw new NotImplementedException();
         }
+        #endregion
+        /// <summary>
+        /// the function return list of all the nannies who match to mom constraints
+        /// </summary>
+        /// <param name="mother"></param>
+        /// <returns></returns>
         public List<Nanny> match(Mother mother)
         {
-            List<Nanny> matchingNannys = new List<Nanny>();
+            List<Nanny> matchingNannys = new List<Nanny>(); // list will contain match nannies to mom constraints
 
             foreach (var n in dal.GetAllNanny())
             {
                 bool match = true;
                 for (int i = 0; i < 6 && match; i++)
-                    if (mother.DaysOfNeedingNanny[i] == true && n.WorkDays[i] == true)
+                    // if mother need nanny & nanny is work - nanny is not match
+                    if (mother.DaysOfNeedingNanny[i] == true && n.WorkDays[i] == true) 
                         match = false;
-                if (match)
+                if (match) // nanny isnt work when mother need a nnany
                 {
                     for (int i = 0; i < 6 && match; i++)
                     {
+                        //if nanny start working in time that mom need nanny | nanny stop working(in other job) after mom need nanny - nanny cant work
                         if ((mother.HoursOfNeedingNanny[0, i].Hour < n.WorkHours[0, i].Hour) || (mother.HoursOfNeedingNanny[1, i].Hour > n.WorkHours[1, i].Hour))
-                            match = false;
+                            match = false; // nanny isnt match
                     }
                 }
                 if (match)
                     matchingNannys.Add(n);
 
             }
-            return matchingNannys;
+            return matchingNannys; // return the all nannies who match mom  constrains
         }
+        /// <summary>
+        /// calculte the distance between two  addresses
+        /// </summary>
+        /// <param name="mother" - mother's address
+        /// <param name="nanny"  - nanny's address
+        /// <returns></returns>
         public static int CalculateDistance(string mother, string nanny)
         {
-            string source = mother;
-            string dest = nanny;
+            string source = mother; // mother's address
+            string dest = nanny; // nanny's address
             var drivingDirectionRequest = new DirectionsRequest
             {
                 TravelMode = TravelMode.Walking,
@@ -180,7 +225,6 @@ namespace BL
         {
             return GetAllNanny();
         }
-
         public List<Nanny> nannysDistance(Mother mother)
         {
             List<Nanny> inDistance = new List<Nanny>();
@@ -217,22 +261,18 @@ namespace BL
         {
             return CalculateDistance(dal.getMom(dal.getChild(c.ChildID).MotherID).Adress, dal.getNanny(c.NannyID).Adress);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sort"></param>
-        /// <returns></returns>
-        List<IGrouping<int, Contract>> gropingByDistance(bool sortByHighDistance = false)
+        #region grouping function
+        List<IGrouping<int, Contract>> groupingByDistance(bool sortByHighDistance = false)
         {
             List<IGrouping<int, Contract>> list = new List<IGrouping<int, Contract>>();
             for (int i = 1; i < 10; i++)
             {
                 var gropingContracts = from c in dal.GetAllContract()
-                                        group c
-                                            by (distanceMotherNanny(c) <= (5000 * i))
+                                       group c
+                                           by (distanceMotherNanny(c) <= (5000 * i))
                     into groping
-                                        where groping.Key
-                                        select new { distanceGroup = i * 5, gruopingContracts = groping };
+                                       where groping.Key
+                                       select new { distanceGroup = i * 5, gruopingContracts = groping };
                 list.AddRange(gropingContracts as List<IGrouping<int, Contract>>);
             }
             if (sortByHighDistance)
@@ -247,17 +287,17 @@ namespace BL
             }
             return list;
         }
-        List<IGrouping<int, Nanny>> gropingByAge(bool sortByHighAge = false)
+        List<IGrouping<int, Nanny>> groupingByAge(bool sortByHighAge = false)
         {
             List<IGrouping<int, Nanny>> list = new List<IGrouping<int, Nanny>>();
             for (int i = 1; i < 100; i++)
             {
                 var gropingNannies = from n in dal.GetAllNanny()
-                                       group n
-                                           by (n.MinAgeOfChild <= (3 * i))
+                                     group n
+                                         by (n.MinAgeOfChild <= (3 * i))
                     into grouping
-                                       where grouping.Key
-                                       select new { distanceGroup = i * 3, groupingNannies = grouping };
+                                     where grouping.Key
+                                     select new { distanceGroup = i * 3, groupingNannies = grouping };
                 list.AddRange(gropingNannies as List<IGrouping<int, Nanny>>);
             }
             if (sortByHighAge)
@@ -272,5 +312,6 @@ namespace BL
             }
             return list;
         }
+        #endregion
     }
 }

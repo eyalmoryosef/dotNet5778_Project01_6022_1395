@@ -11,24 +11,31 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BE;
-using BL;
+
 namespace UI
 {
-
-  
-
-    public partial class addNannyWindow : Window
+    /// <summary>
+    /// Interaction logic for addChildWindow.xaml
+    /// </summary>
+    public partial class addChildWindow : Window
     {
-        BE.Nanny nanny;
-        BL.IBL bl;
-        public addNannyWindow()
+        public addChildWindow()
         {
             InitializeComponent();
-            nanny = new BE.Nanny();
-          //  bl = new BL.FactoryBL.GetBL();
         }
-        
 
+    
+
+     
+
+        private void childDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Window_Loaded()
+        {
+
+        }
     }
 }
