@@ -18,6 +18,7 @@ namespace BL
         //{
         //    dal = new DAL.init_dal.init();
         //}
+
         #region add "item" function
         public void addChild(Child child)
         {
@@ -68,6 +69,7 @@ namespace BL
 
         }
         #endregion
+
         #region delate "item"  function
         public void deleteChild(Child child)
         {
@@ -122,6 +124,7 @@ namespace BL
             }
         }
         #endregion
+
         #region get list of "item" function
         public List<Child> GetAllChild()
         {
@@ -143,6 +146,7 @@ namespace BL
             throw new NotImplementedException();
         }
         #endregion
+
         #region update "item" function
         public void updatingChild(Child child)
         {
@@ -164,23 +168,25 @@ namespace BL
             throw new NotImplementedException();
         }
         #endregion
+
         /// <summary>
         /// the function return list of all the nannies who match to mom constraints
         /// </summary>
-        /// <param name="mother"></param>
-        /// <returns></returns>
-        public List<Nanny> match(Mother mother)
+        /// <param name="FullMatch">A parameter indicating whether or not the nanny is suitable 100% of the mother's needs</param>
+        /// <returns>returns the list of the matching nannies</returns>
+        public List<Nanny> match(Mother mother, bool FullMatch)
         {
             List<Nanny> matchingNannys = new List<Nanny>(); // list will contain match nannies to mom constraints
+            int Km;
 
             foreach (var n in dal.GetAllNanny())
             {
                 bool match = true;
                 for (int i = 0; i < 6 && match; i++)
-                    // if mother need nanny & nanny is work - nanny is not match
-                    if (mother.DaysOfNeedingNanny[i] == true && n.WorkDays[i] == true) 
+                    // if mother need nanny & nanny doesn't workes on that day - nanny is not match
+                    if (mother.DaysOfNeedingNanny[i] == true && n.WorkDays[i] == false) 
                         match = false;
-                if (match) // nanny isnt work when mother need a nnany
+                if (match) // nanny workes when mother need a nanny
                 {
                     for (int i = 0; i < 6 && match; i++)
                     {
@@ -189,12 +195,26 @@ namespace BL
                             match = false; // nanny isnt match
                     }
                 }
+                
+                
+                //If full match is required:
+                if(FullMatch)
+                   Km = 1;
+                else//If make do with partial match:
+                   Km = 5;
+                
+                //If the nanny lives far from the area that the mother requested, it's not appropriate
+                if(match && CalculateDistance(mother.DesiredAddressOfNanny , n.Adress) > Km)
+                    match = false;
+                
+
                 if (match)
                     matchingNannys.Add(n);
 
             }
-            return matchingNannys; // return the all nannies who match mom  constrains
+            return matchingNannys; // return the all nannies who match mom constrains
         }
+
         /// <summary>
         /// calculte the distance between two  addresses
         /// </summary>
@@ -216,6 +236,7 @@ namespace BL
             Leg leg = route.Legs.First();
             return leg.Distance.Value;
         }
+
         /// <summary>
         ///
         /// </summary>
@@ -225,6 +246,7 @@ namespace BL
         {
             return GetAllNanny();
         }
+
         public List<Nanny> nannysDistance(Mother mother)
         {
             List<Nanny> inDistance = new List<Nanny>();
@@ -236,6 +258,7 @@ namespace BL
             }
             return inDistance;
         }
+
         public List<Child> childWithoutNanny()
         {
             List<Child> withoutNanny = new List<Child>();
@@ -247,6 +270,7 @@ namespace BL
             }
             return withoutNanny;
         }
+
         public List<Nanny> nannyTAMAT()
         {
             List<Nanny> TAMAT = new List<Nanny>();
@@ -257,10 +281,12 @@ namespace BL
             }
             return TAMAT;
         }
+
         public int distanceMotherNanny(Contract c)
         {
             return CalculateDistance(dal.getMom(dal.getChild(c.ChildID).MotherID).Adress, dal.getNanny(c.NannyID).Adress);
         }
+
         #region grouping function
         List<IGrouping<int, Contract>> groupingByDistance(bool sortByHighDistance = false)
         {
@@ -287,6 +313,7 @@ namespace BL
             }
             return list;
         }
+
         List<IGrouping<int, Nanny>> groupingByAge(bool sortByHighAge = false)
         {
             List<IGrouping<int, Nanny>> list = new List<IGrouping<int, Nanny>>();
@@ -313,5 +340,7 @@ namespace BL
             return list;
         }
         #endregion
+
+
     }
 }

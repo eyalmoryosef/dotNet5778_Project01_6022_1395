@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\drakovsk\Source\Repos\UI\obj\Debug\
+C:\Users\drakovsk\Source\Repos\UI\obj\Release\
 UI
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\drakovsk\Source\Repos\UI\App.xaml
 5-1007194762
 
 9-1843399744
-191452841274
+19-699101548
 addChildWindow.xaml;addNannyWindow.xaml;MainWindow.xaml;motherWindow.xaml;nannyWindow.xaml;
 
 True

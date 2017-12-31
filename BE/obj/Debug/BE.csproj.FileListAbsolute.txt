@@ -2,3 +2,8 @@ C:\Users\אייל עבושה\Desktop\dotNet5778_Project01_6022_1395\BE\bin\Debug
 C:\Users\אייל עבושה\Desktop\dotNet5778_Project01_6022_1395\BE\bin\Debug\BE.pdb
 C:\Users\אייל עבושה\Desktop\dotNet5778_Project01_6022_1395\BE\obj\Debug\BE.dll
 C:\Users\אייל עבושה\Desktop\dotNet5778_Project01_6022_1395\BE\obj\Debug\BE.pdb
+C:\Users\drakovsk\Source\Repos\BE\bin\Debug\BE.dll
+C:\Users\drakovsk\Source\Repos\BE\bin\Debug\BE.pdb
+C:\Users\drakovsk\Source\Repos\BE\obj\Debug\BE.csprojResolveAssemblyReference.cache
+C:\Users\drakovsk\Source\Repos\BE\obj\Debug\BE.dll
+C:\Users\drakovsk\Source\Repos\BE\obj\Debug\BE.pdb
