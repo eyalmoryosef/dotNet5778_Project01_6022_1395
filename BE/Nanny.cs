@@ -11,14 +11,31 @@ namespace BE
         #region Fields
         readonly int id;
         readonly DateTime date_of_birth;
-
-        public Nanny()
-        {
-
-        }
         #endregion
 
         #region Constructors:
+        public Nanny()
+        {
+            id = 0;
+            LastName = null;
+            FirstName = null;
+            date_of_birth = null;
+            Phone = 0;
+            Adress =null;
+            Elevator = false;
+            Floor = 0;
+            YearsOfExperience = 0;
+            MaxChilds = 0;
+            MinAgeOfChild = 0;
+            MaxAgeOfChild = 0;
+            HourlyRate = false;
+            PricePerHour = 0;
+            PricePerMonth = 0;
+            WorkDays = null;
+            WorkHours = null;
+            StateDaysOff = false;
+            Recommendations = null;   
+        }
         public Nanny(int iD, string lastName, string firstName, DateTime dateOfBirth, int phone, string adress, bool elevator, int floor, int yearsOfExperience, int maxChilds, int minAgeOfChild, int maxAgeOfChild, bool hourlyRate, int pricePerHour, int pricePerMonth, bool[] workDays, DateTime[,] workHours, bool stateDaysOff, string recommendations)
         {
             #region id = iD (with validation)
@@ -130,6 +147,28 @@ namespace BE
             StateDaysOff = stateDaysOff;
 
             Recommendations = recommendations;
+        }
+        public Nanny(Nanny nanny)
+        {
+            this.id = nanny.id;
+            this.LastName = nanny.LastName;
+            this.FirstName = nanny.FirstName;
+            this.date_of_birth = nanny.date_of_birth;
+            this.Phone = nanny.Phone;
+            this.Adress = nanny.Adress;
+            this.Elevator = nanny.Elevator;
+            this.Floor = nanny.Floor;
+            this.YearsOfExperience = nanny.YearsOfExperience;
+            this.MaxChilds = nanny.MaxChilds;
+            this.MinAgeOfChild = nanny.MinAgeOfChild;
+            this.MaxAgeOfChild = nanny.MaxAgeOfChild;
+            this.HourlyRate = nanny.HourlyRate;
+            this.PricePerHour = nanny.PricePerHour;
+            this.PricePerMonth = nanny.PricePerMonth;
+            this.WorkDays = nanny.WorkDays;
+            this.WorkHours = nanny.WorkHours;
+            this.StateDaysOff = nanny.StateDaysOff;
+            this.Recommendations = nanny.Recommendations; 
         }
         #endregion
 
@@ -254,6 +293,7 @@ namespace BE
             return "I am the nanny: " + FirstName + ' ' + LastName + ", ID: " + ID;
         }
         #endregion
+        
         //מאפיינים נוספים לפי הצורך
         //בדיקת שם תקין
     }
