@@ -1,4 +1,5 @@
-﻿using System;
+﻿//(C) 5778 David Rakovsky and Eyal Mor-Yosef 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,10 @@ namespace DAL
     {
         private int runningNumber = 1;
 
+        #region add functions        
+        /// <summary>
+        /// A function that adds a new child to the ChildList
+        /// </summary>
         public void addChild(Child child)
         {
             if (idExist(child.ID))//Check whether the ID already exists
@@ -21,6 +26,9 @@ namespace DAL
             DataSource.ChildList.Add(child);
         }
 
+        /// <summary>
+        /// A function that adds a new contract to the ContractList
+        /// </summary>
         public void addContract(Contract contract)
         {
             if (!idExist(contract.ChildID))
@@ -28,12 +36,15 @@ namespace DAL
             if (!idExist(contract.NannyID))
                 throw new ArgumentException("The nanny that in the contract doesnt exist");
 
-            contract.Num = Convert.ToString(runningNumber++);
+            contract.Num = Convert.ToString(runningNumber++);//adding the running number
             contract.Num.PadLeft(8, '0');//padding the num with '0' to reach 8 digits
 
             DataSource.ContractList.Add(contract);
         }
 
+        /// <summary>
+        /// A function that adds a new mother to the MotherList
+        /// </summary>
         public void addMother(Mother mother)
         {
             if (idExist(mother.ID))
@@ -43,6 +54,9 @@ namespace DAL
             DataSource.MotherList.Add(mother);
         }
 
+        /// <summary>
+        /// A function that adds a new nanny to the NannyList
+        /// </summary>
         public void addNanny(Nanny nanny)
         {
             if (idExist(nanny.ID))
@@ -51,7 +65,12 @@ namespace DAL
             DataSource.IDList.Add(nanny.ID);
             DataSource.NannyList.Add(nanny);
         }
+        #endregion
 
+        #region delete functions
+        /// <summary>
+        /// A function that deletes a child from the ChildList
+        /// </summary>
         public void deleteChild(Child child)
         {
             if (!DataSource.ChildList.Remove(child))
@@ -60,12 +79,18 @@ namespace DAL
             DataSource.IDList.Remove(child.ID);
         }
 
+        /// <summary>
+        /// A function that deletes a contract from the ContractList
+        /// </summary>
         public void deleteContract(Contract contract)
         {
             if (!DataSource.ContractList.Remove(contract))
                 throw new KeyNotFoundException("The contract does not exist and therefore can not be deleted");
         }
 
+        /// <summary>
+        /// A function that deletes a mother from the MotherList
+        /// </summary>
         public void deleteMother(Mother mother)
         {
             if (!DataSource.MotherList.Remove(mother))
@@ -74,6 +99,9 @@ namespace DAL
             DataSource.IDList.Remove(mother.ID);
         }
 
+        /// <summary>
+        /// A function that deletes a nanny from the NannyList
+        /// </summary>
         public void deleteNanny(Nanny nanny)
         {
             if (!DataSource.NannyList.Remove(nanny))
@@ -81,27 +109,46 @@ namespace DAL
 
             DataSource.IDList.Remove(nanny.ID);
         }
+        #endregion
 
+        #region get list functions
+        /// <summary>
+        /// A function that returns the ChildList
+        /// </summary>
         public List<Child> GetAllChild()
         {
             return DataSource.ChildList;
         }
 
+        /// <summary>
+        /// A function that returns the ContractList
+        /// </summary>
         public List<Contract> GetAllContract()
         {
             return DataSource.ContractList;
         }
 
+        /// <summary>
+        /// A function that returns the MotherList
+        /// </summary>
         public List<Mother> GetAllMother()
         {
             return DataSource.MotherList;
         }
 
+        /// <summary>
+        /// A function that returns the NannyList
+        /// </summary>
         public List<Nanny> GetAllNanny()
         {
             return DataSource.NannyList;
         }
+        #endregion
 
+        #region updating functions
+        /// <summary>
+        /// A function that updates an existing child
+        /// </summary>
         public void updatingChild(Child child)
         {
             Child old_child;
@@ -121,6 +168,9 @@ namespace DAL
             addChild(child);
         }
 
+        /// <summary>
+        /// A function that updates an existing contract
+        /// </summary>
         public void updatingContract(Contract contract)
         {
             Contract old_contract;
@@ -137,6 +187,9 @@ namespace DAL
             addContract(contract);
         }
 
+        /// <summary>
+        /// A function that updates an existing mother
+        /// </summary>
         public void updatingMother(Mother mother)
         {
             Mother old_mother;
@@ -150,6 +203,9 @@ namespace DAL
             addMother(mother);
         }
 
+        /// <summary>
+        /// A function that updates an existing nanny
+        /// </summary>
         public void updatingNanny(Nanny nanny)
         {
             Nanny old_nanny;
@@ -165,7 +221,52 @@ namespace DAL
             deleteNanny(old_nanny);
             addNanny(nanny);
         }
+        #endregion
 
+        #region get functions
+        /// <summary>
+        /// EXTRA: A function that returns the specific mother based on ID
+        /// (using the lambda expression)
+        /// </summary>
+        public Mother getMother(int id)
+        {
+            return DataSource.MotherList.Find(m => m.ID == id);
+        }
+
+        /// <summary>
+        /// EXTRA: A function that returns the specific nanny based on ID
+        /// (using the lambda expression)
+        /// </summary>
+        public Nanny getNanny(int id)
+        {
+            return DataSource.NannyList.Find(n => n.ID == id);
+        }
+
+        /// <summary>
+        /// EXTRA: A function that returns the specific child based on ID
+        /// (using the lambda expression)
+        /// </summary>
+        public Child getChild(int id)
+        {
+            return DataSource.ChildList.Find(c => c.ID == id);
+        }
+
+        /// <summary>
+        /// EXTRA: A function that returns the specific contract based on Child's ID
+        /// (using the lambda expression)
+        /// </summary>
+        public Contract getContract(int id)
+        {
+            return DataSource.ContractList.Find(c => c.ChildID == id);
+        }
+        #endregion
+
+        #region 'check if exists' functions
+        /// <summary>
+        /// EXTRA: A function that checks whether the ID exists in the system
+        /// (including all: nannies, mothers, and children)
+        /// </summary>
+        /// <returns>whether the ID exists in the system</returns>
         private bool idExist(int id)
         {
             foreach (int item in DataSource.IDList)
@@ -175,25 +276,15 @@ namespace DAL
             }
             return false;
         }
-        public Mother getMother(int id)
-        {
-            return DataSource.MotherList.Find(m => m.ID == id);
-        }
-        public Nanny getNanny(int id)
-        {
-            return DataSource.NannyList.Find(n => n.ID == id);
-        }
-        public Child getChild(int id)
-        {
-            return DataSource.ChildList.Find(c => c.ID == id);
-        }
-        public Contract getContract(int id)
-        {
-            return DataSource.ContractList.Find(c => c.ChildID == id);
-        }
+
+        /// <summary>
+        /// EXTRA: A function that checks whether the specific contract (according to ID) exists
+        /// (using the lambda expression)
+        /// </summary>
         public bool ContractExists(int id)
         {
             return DataSource.ContractList.Exists(c => c.ChildID == id);
         }
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿//(C) 5778 David Rakovsky and Eyal Mor-Yosef 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,9 @@ using BE;
 
 namespace DS
 {
+    /// <summary>
+    /// The data source of the project
+    /// </summary>
     public class DataSource
     {
         public static List<Nanny> NannyList;

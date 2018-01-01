@@ -1,4 +1,5 @@
-﻿using System;
+﻿//(C) 5778 David Rakovsky and Eyal Mor-Yosef 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,27 +7,36 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-   public class Contract
+    public class Contract
     {
         #region Fields
+        //readonly fields
         readonly int nanny_id;
         readonly int child_id;
         #endregion
 
         #region Constructors:
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Contract()
         {
-            Num = 0;
+            Num = "0";
             nanny_id = 0;
             child_id = 0;
             IntroductoryMeeting = false;
             ContractSigned = false;
             HourlySalary = 0;
             MonthlySalary = 0;
-            SalaryBy = null;
-            DateOfStartContract = null;
-            DateOfEndContract = null;
+            HourOrMonth = SalaryBy.Hour;
+            DateOfStartContract = DateTime.Today;
+            DateOfEndContract = DateTime.Today;
         }
+
+        /// <summary>
+        /// Parameters constructor
+        /// </summary>
         public Contract(string num, int nannyID, int childID, bool introductoryMeeting, bool contractSigned, int hourlySalary, int monthlySalary, SalaryBy hourOrMonth, DateTime dateOfStartContract, DateTime dateOfEndContract)
         {
             #region Num = num (with validation)
@@ -107,6 +117,10 @@ namespace BE
             DateOfEndContract = dateOfEndContract;
             #endregion
         }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
         public Contract(Contract contract)
         {
             this.Num = contract.Num;
@@ -116,13 +130,16 @@ namespace BE
             this.ContractSigned = contract.ContractSigned;
             this.HourlySalary = contract.HourlySalary;
             this.MonthlySalary = contract.MonthlySalary;
-            this.SalaryBy = contract.SalaryBy;
+            this.HourOrMonth = contract.HourOrMonth;
             this.DateOfStartContract = contract.DateOfStartContract;
             this.DateOfEndContract = contract.DateOfEndContract;
         }
         #endregion
 
         #region Properties:
+        /// <summary>
+        /// Get/Set Num
+        /// </summary>
         public string Num
         {
             get { return Num; }
@@ -142,26 +159,62 @@ namespace BE
                 Num = value;
             }
         }
+
+        /// <summary>
+        /// Get nanny_id
+        /// </summary>
         public int NannyID { get { return nanny_id; } }
+
+        /// <summary>
+        /// Get child_id
+        /// </summary>
         public int ChildID { get { return child_id; } }
-        public bool IntroductoryMeeting { get { return IntroductoryMeeting; }  set { IntroductoryMeeting = value; } }
+
+        /// <summary>
+        /// Get/Set IntroductoryMeeting
+        /// </summary>
+        public bool IntroductoryMeeting { get { return IntroductoryMeeting; } set { IntroductoryMeeting = value; } }
+
+        /// <summary>
+        /// Get/Set ContractSigned
+        /// </summary>
         public bool ContractSigned { get { return ContractSigned; } set { ContractSigned = value; } }
+
+        /// <summary>
+        /// Get/Set HourlySalary
+        /// </summary>
         public int HourlySalary { get { return HourlySalary; } set { HourlySalary = value; } }
+
+        /// <summary>
+        /// Get/Set MonthlySalary
+        /// </summary>
         public int MonthlySalary { get { return MonthlySalary; } set { MonthlySalary = value; } }
-        public SalaryBy HourOrMonth { get { return HourOrMonth; } set { HourOrMonth = value;  } }
+
+        /// <summary>
+        /// Get/Set HourOrMonth
+        /// </summary>
+        public SalaryBy HourOrMonth { get { return HourOrMonth; } set { HourOrMonth = value; } }
+
+        /// <summary>
+        /// Get/Set DateOfStartContract
+        /// </summary>
         public DateTime DateOfStartContract
         {
             get { return DateOfStartContract; }
             set
             {
                 if (value.CompareTo(DateTime.Now) == 1)
-                        throw new ArgumentException("The entered date of birth is in the future");
+                    throw new ArgumentException("The entered date of birth is in the future");
                 DateOfStartContract = value;
             }
         }
+
+        /// <summary>
+        /// Get/Set DateOfEndContract
+        /// </summary>
         public DateTime DateOfEndContract
         {
-            get{ return DateOfEndContract; }
+            get { return DateOfEndContract; }
             set
             {
                 if (value.CompareTo(DateOfStartContract) == -1)
@@ -172,6 +225,10 @@ namespace BE
         #endregion
 
         #region Methods:
+        /// <summary>
+        /// Contract's ToString
+        /// </summary>
+        /// <returns>Contract's ToString</returns>
         public override string ToString()
         {
             return "I am the contract No." + Num + ", nanny ID: " + NannyID + ", child ID: " + ChildID;
@@ -180,5 +237,5 @@ namespace BE
         //מאפיינים נוספים לפי הצורך
     }
 
-    public enum SalaryBy {Hour, Month};
+    public enum SalaryBy { Hour, Month };
 }

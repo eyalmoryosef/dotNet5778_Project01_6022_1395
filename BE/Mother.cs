@@ -1,4 +1,5 @@
-﻿using System;
+﻿//(C) 5778 David Rakovsky and Eyal Mor-Yosef 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,18 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class Mother 
+    public class Mother
     {
         #region Fields
+        //readonly fields
         readonly int id;
         #endregion
 
         #region Constructors:
-        public Mother()     
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public Mother()
         {
             id = 0;
             LastName = null;
@@ -25,6 +30,10 @@ namespace BE
             HoursOfNeedingNanny = null;
             Recommendations = null;
         }
+
+        /// <summary>
+        /// Parameters constructor
+        /// </summary>
         public Mother(int iD, string lastName, string firstName, int phone, string adress, string desiredAddressOfNanny, bool[] daysOfNeedingNanny, DateTime[,] hoursOfNeedingNanny, string recommendations)
         {
             #region id = iD (with validation)
@@ -103,6 +112,10 @@ namespace BE
 
             Recommendations = recommendations;
         }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
         public Mother(Mother mother)
         {
             this.id = mother.id;
@@ -118,31 +131,54 @@ namespace BE
         #endregion
 
         #region Properties:
-        public int ID{get { return id; }}
+        /// <summary>
+        /// Get id
+        /// </summary>
+        public int ID { get { return id; } }
+
+        /// <summary>
+        /// Get/set LastName
+        /// </summary>
         public string LastName { get { return LastName; } set { LastName = value; } }
+
+        /// <summary>
+        /// Get/set FirstName
+        /// </summary>
         public string FirstName { get { return FirstName; } set { FirstName = value; } }
+
+        /// <summary>
+        /// Get/set Phone
+        /// </summary>
         public int Phone { get { return Phone; } set { Phone = value; } }
+
+        /// <summary>
+        /// Get/set Adress
+        /// </summary>
         public string Adress
         {
             get { return Adress; }
             set
             {
-                int counter = 0, helpChar = value.IndexOf(',',2);
+                int counter = 0, helpChar = value.IndexOf(',', 2);
 
                 if (helpChar == -1)
                     throw new FormatException("The string is not in the format: Street, City, State");
-               
-                for (; helpChar != -1 ;counter++)
+
+                for (; helpChar != -1; counter++)
                 {
                     helpChar = value.IndexOf(',', helpChar + 1);
                 }
-               
-                if(counter != 3)
+
+                if (counter != 3)
                     throw new FormatException("The string is not in the format: Street, City, State");
 
                 Adress = value;
             }
         }
+
+        /// <summary>
+        /// Get/set DesiredAddressOfNanny
+        /// </summary>
         public string DesiredAddressOfNanny
         {
             get { return DesiredAddressOfNanny; }
@@ -164,6 +200,10 @@ namespace BE
                 DesiredAddressOfNanny = value;
             }
         }
+
+        /// <summary>
+        /// Get/set DaysOfNeedingNanny
+        /// </summary>
         public bool[] DaysOfNeedingNanny
         {
             get { return DaysOfNeedingNanny; }
@@ -174,6 +214,10 @@ namespace BE
                 DaysOfNeedingNanny = value;
             }
         }
+
+        /// <summary>
+        /// Get/set HoursOfNeedingNanny
+        /// </summary>
         public DateTime[,] HoursOfNeedingNanny
         {
             get { return HoursOfNeedingNanny; }
@@ -184,10 +228,18 @@ namespace BE
                 HoursOfNeedingNanny = value;
             }
         }
+
+        /// <summary>
+        /// Get/set Recommendations
+        /// </summary>
         public string Recommendations { get { return Recommendations; } set { Recommendations = value; } }
         #endregion
 
         #region Methods:
+        /// <summary>
+        /// Mother's ToString
+        /// </summary>
+        /// <returns>Mother's ToString</returns>
         public override string ToString()
         {
             return "I am the mother: " + FirstName + ' ' + LastName + ", ID: " + ID;

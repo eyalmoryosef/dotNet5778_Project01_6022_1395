@@ -1,4 +1,5 @@
-﻿using System;
+﻿//(C) 5778 David Rakovsky and Eyal Mor-Yosef 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,11 +10,15 @@ namespace BE
     public class Nanny
     {
         #region Fields
+        //readonly fields
         readonly int id;
         readonly DateTime date_of_birth;
         #endregion
 
         #region Constructors:
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Nanny()
         {
             id = 0;
@@ -21,7 +26,7 @@ namespace BE
             FirstName = null;
             date_of_birth = null;
             Phone = 0;
-            Adress =null;
+            Adress = null;
             Elevator = false;
             Floor = 0;
             YearsOfExperience = 0;
@@ -34,8 +39,12 @@ namespace BE
             WorkDays = null;
             WorkHours = null;
             StateDaysOff = false;
-            Recommendations = null;   
+            Recommendations = null;
         }
+
+        /// <summary>
+        /// Parameters constructor
+        /// </summary>
         public Nanny(int iD, string lastName, string firstName, DateTime dateOfBirth, int phone, string adress, bool elevator, int floor, int yearsOfExperience, int maxChilds, int minAgeOfChild, int maxAgeOfChild, bool hourlyRate, int pricePerHour, int pricePerMonth, bool[] workDays, DateTime[,] workHours, bool stateDaysOff, string recommendations)
         {
             #region id = iD (with validation)
@@ -148,6 +157,10 @@ namespace BE
 
             Recommendations = recommendations;
         }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
         public Nanny(Nanny nanny)
         {
             this.id = nanny.id;
@@ -168,16 +181,39 @@ namespace BE
             this.WorkDays = nanny.WorkDays;
             this.WorkHours = nanny.WorkHours;
             this.StateDaysOff = nanny.StateDaysOff;
-            this.Recommendations = nanny.Recommendations; 
+            this.Recommendations = nanny.Recommendations;
         }
         #endregion
 
         #region Properties:
-        public int ID{get { return id;}}
+        /// <summary>
+        /// Get id
+        /// </summary>
+        public int ID { get { return id; } }
+
+        /// <summary>
+        /// Get/set LastName
+        /// </summary>
         public string LastName { get { return LastName; } set { LastName = value; } }
+
+        /// <summary>
+        /// Get/set FirstName
+        /// </summary>
         public string FirstName { get { return FirstName; } set { FirstName = value; } }
+
+        /// <summary>
+        /// Get date_of_birth
+        /// </summary>
         public DateTime DateOfBirth { get { return date_of_birth; } }
+
+        /// <summary>
+        /// Get/set Phone
+        /// </summary>
         public int Phone { get { return Phone; } set { Phone = value; } }
+
+        /// <summary>
+        /// Get/set Adress
+        /// </summary>
         public string Adress
         {
             get { return Adress; }
@@ -199,8 +235,20 @@ namespace BE
                 Adress = value;
             }
         }
+
+        /// <summary>
+        /// Get/set Elevator
+        /// </summary>
         public bool Elevator { get { return Elevator; } set { Elevator = value; } }
+
+        /// <summary>
+        /// Get/set Floor
+        /// </summary>
         public int Floor { get { return Floor; } set { Floor = value; } }
+
+        /// <summary>
+        /// Get/set YearsOfExperience
+        /// </summary>
         public int YearsOfExperience
         {
             get { return YearsOfExperience; }
@@ -212,6 +260,10 @@ namespace BE
                 YearsOfExperience = value;
             }
         }
+
+        /// <summary>
+        /// Get/set MaxChilds
+        /// </summary>
         public int MaxChilds
         {
             get { return MaxChilds; }
@@ -222,6 +274,10 @@ namespace BE
                 MaxChilds = value;
             }
         }
+
+        /// <summary>
+        /// Get/set MinAgeOfChild
+        /// </summary>
         public int MinAgeOfChild
         {
             get { return MinAgeOfChild; }
@@ -232,6 +288,10 @@ namespace BE
                 MinAgeOfChild = value;
             }
         }
+
+        /// <summary>
+        /// Get/set MaxAgeOfChild
+        /// </summary>
         public int MaxAgeOfChild
         {
             get { return MaxAgeOfChild; }
@@ -242,7 +302,15 @@ namespace BE
                 MaxAgeOfChild = value;
             }
         }
+
+        /// <summary>
+        /// Get/set HourlyRate
+        /// </summary>
         public bool HourlyRate { get { return HourlyRate; } set { HourlyRate = value; } }
+
+        /// <summary>
+        /// Get/set PricePerHour
+        /// </summary>
         public int PricePerHour
         {
             get { return PricePerHour; }
@@ -253,6 +321,10 @@ namespace BE
                 PricePerHour = value;
             }
         }
+
+        /// <summary>
+        /// Get/set PricePerMonth
+        /// </summary>
         public int PricePerMonth
         {
             get { return PricePerMonth; }
@@ -263,6 +335,10 @@ namespace BE
                 PricePerMonth = value;
             }
         }
+
+        /// <summary>
+        /// Get/set WorkDays
+        /// </summary>
         public bool[] WorkDays
         {
             get { return WorkDays; }
@@ -273,6 +349,10 @@ namespace BE
                 WorkDays = value;
             }
         }
+
+        /// <summary>
+        /// Get/set WorkHours
+        /// </summary>
         public DateTime[,] WorkHours
         {
             get { return WorkHours; }
@@ -283,17 +363,29 @@ namespace BE
                 WorkHours = value;
             }
         }
+
+        /// <summary>
+        /// Get/set StateDaysOff
+        /// </summary>
         public bool StateDaysOff { get { return StateDaysOff; } set { StateDaysOff = value; } }
+
+        /// <summary>
+        /// Get/set Recommendations
+        /// </summary>
         public string Recommendations { get { return Recommendations; } set { Recommendations = value; } }
         #endregion
 
         #region Methods:
+        /// <summary>
+        /// Nanny's ToString
+        /// </summary>
+        /// <returns>Nanny's ToString</returns>
         public override string ToString()
         {
             return "I am the nanny: " + FirstName + ' ' + LastName + ", ID: " + ID;
         }
         #endregion
-        
+
         //מאפיינים נוספים לפי הצורך
         //בדיקת שם תקין
     }
