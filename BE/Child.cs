@@ -16,6 +16,15 @@ namespace BE
         #endregion
 
         #region Constructors:
+        public Child()
+        {
+            id = 0;
+            mother_id = 0;
+            FirstName = null;
+            date_of_birth = null;
+            SpecialNeeds = false;
+            TheSpecialNeeds = null;
+        }
         public Child(int iD, int motherID, string firstName, DateTime dateOfBirth, bool specialNeeds, string theSpecialNeeds)
         {
             #region  id = iD (with validation)
@@ -69,11 +78,20 @@ namespace BE
 
             TheSpecialNeeds = theSpecialNeeds;
         }
+        public Child(Child child)
+        {
+            this.id = child.id;
+            this.mother_id = child.mother_id;
+            this.FirstName = child.FirstName;
+            this.date_of_birth = child.date_of_birth;
+            this.SpecialNeeds = child.SpecialNeeds;
+            this.TheSpecialNeeds = child.TheSpecialNeeds;
+        }
         #endregion
 
         #region Properties:
         public int ID { get { return id; } }
-        public int MotherID { get { return MotherID; }}
+        public int MotherID { get { return mother_id; }}
         public string FirstName { get { return FirstName; } set { FirstName = value; } }
         public DateTime DateOfBirth { get { return date_of_birth; } }
         public bool SpecialNeeds { get { return SpecialNeeds; } set { SpecialNeeds = value; } }
@@ -87,5 +105,6 @@ namespace BE
         }
         #endregion
         //מאפיינים נוספים לפי הצורך
+        //בדיקת שם תקין
     }
 }

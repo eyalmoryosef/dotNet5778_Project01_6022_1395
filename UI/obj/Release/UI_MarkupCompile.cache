@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\drakovsk\Source\Repos\UI\obj\Release\
+C:\Users\drakovsk\Source\Repos\dotNet5778_Project01_6022_1395\UI\obj\Release\
 UI
 none
 false
 TRACE
-C:\Users\drakovsk\Source\Repos\UI\App.xaml
-5-1007194762
+C:\Users\drakovsk\Source\Repos\dotNet5778_Project01_6022_1395\UI\App.xaml
+5-2097235384
 
-9-1843399744
-19-699101548
-addChildWindow.xaml;addNannyWindow.xaml;MainWindow.xaml;motherWindow.xaml;nannyWindow.xaml;
+9-235704122
+19-519866306
+child\addChildWindow.xaml;nanny\addNannyWindow.xaml;MainWindow.xaml;mother\motherWindow.xaml;nanny\nannyWindow.xaml;
 
 True
 

@@ -13,6 +13,18 @@ namespace BE
         #endregion
 
         #region Constructors:
+        public Mother()     
+        {
+            id = 0;
+            LastName = null;
+            FirstName = null;
+            Phone = 0;
+            Adress = null;
+            DesiredAddressOfNanny = null;
+            DaysOfNeedingNanny = null;
+            HoursOfNeedingNanny = null;
+            Recommendations = null;
+        }
         public Mother(int iD, string lastName, string firstName, int phone, string adress, string desiredAddressOfNanny, bool[] daysOfNeedingNanny, DateTime[,] hoursOfNeedingNanny, string recommendations)
         {
             #region id = iD (with validation)
@@ -90,6 +102,18 @@ namespace BE
             #endregion
 
             Recommendations = recommendations;
+        }
+        public Mother(Mother mother)
+        {
+            this.id = mother.id;
+            this.LastName = mother.LastName;
+            this.FirstName = mother.FirstName;
+            this.Phone = mother.Phone;
+            this.Adress = mother.Adress;
+            this.DesiredAddressOfNanny = mother.DesiredAddressOfNanny;
+            this.DaysOfNeedingNanny = mother.DaysOfNeedingNanny;
+            this.HoursOfNeedingNanny = mother.HoursOfNeedingNanny;
+            this.Recommendations = mother.Recommendations;
         }
         #endregion
 

@@ -10,3 +10,6 @@ C:\Users\אייל עבושה\Desktop\dotNet5778_Project01_6022_1395\DAL\obj\Debu
 C:\Users\drakovsk\Source\Repos\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 C:\Users\drakovsk\Source\Repos\DAL\obj\Debug\DAL.dll
 C:\Users\drakovsk\Source\Repos\DAL\obj\Debug\DAL.pdb
+C:\Users\drakovsk\Source\Repos\dotNet5778_Project01_6022_1395\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\drakovsk\Source\Repos\dotNet5778_Project01_6022_1395\DAL\obj\Debug\DAL.dll
+C:\Users\drakovsk\Source\Repos\dotNet5778_Project01_6022_1395\DAL\obj\Debug\DAL.pdb

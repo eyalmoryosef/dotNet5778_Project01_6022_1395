@@ -345,10 +345,44 @@ namespace BL
             return TAMAT;
         }
 
-        public int distanceMotherNanny(Contract c)
+        public int distanceMotherNanny(Contract contract)
         {
-            return CalculateDistance(dal.getMom(dal.getChild(c.ChildID).MotherID).Adress, dal.getNanny(c.NannyID).Adress);
+            return CalculateDistance(dal.getMom(dal.getChild(contract.ChildID).MotherID).Adress, dal.getNanny(contract.NannyID).Adress);
         }
+
+        #region delegate
+        delegate bool condition(Contract contract);
+
+        /// <summary>
+        /// Returns a list of all contracts that meet the requierment
+        /// </summary>
+        /// <param name="cond">condition delegate</param>
+        public List<Contract> GetContractByCondition(condition cond)
+        {
+            List<Contract> newList;
+            foreach (Contract item in GetAllContract)
+	        {
+                if(cond)
+                    newList.Add(item);
+	        }
+            return newList;
+        }
+        
+        /// <summary>
+        /// Returns the number of all contracts that meet the requierment
+        /// </summary>
+        /// <param name="cond">condition delegate</param>
+        public List<Contract> GetNumOfContractsStandingOnCondition(condition cond)
+        {
+            int num = 0;
+            foreach (Contract item in GetAllContract)
+	        {
+                if(cond)
+                    num++;
+	        }
+            return num;
+        }
+        #endregion
 
         #region grouping function
         List<IGrouping<int, Contract>> groupingByDistance(bool sortByHighDistance = false)

@@ -14,6 +14,19 @@ namespace BE
         #endregion
 
         #region Constructors:
+        public Contract()
+        {
+            Num = 0;
+            nanny_id = 0;
+            child_id = 0;
+            IntroductoryMeeting = false;
+            ContractSigned = false;
+            HourlySalary = 0;
+            MonthlySalary = 0;
+            SalaryBy = null;
+            DateOfStartContract = null;
+            DateOfEndContract = null;
+        }
         public Contract(string num, int nannyID, int childID, bool introductoryMeeting, bool contractSigned, int hourlySalary, int monthlySalary, SalaryBy hourOrMonth, DateTime dateOfStartContract, DateTime dateOfEndContract)
         {
             #region Num = num (with validation)
@@ -94,6 +107,19 @@ namespace BE
             DateOfEndContract = dateOfEndContract;
             #endregion
         }
+        public Contract(Contract contract)
+        {
+            this.Num = contract.Num;
+            this.nanny_id = contract.nanny_id;
+            this.child_id = contract.child_id;
+            this.IntroductoryMeeting = contract.IntroductoryMeeting;
+            this.ContractSigned = contract.ContractSigned;
+            this.HourlySalary = contract.HourlySalary;
+            this.MonthlySalary = contract.MonthlySalary;
+            this.SalaryBy = contract.SalaryBy;
+            this.DateOfStartContract = contract.DateOfStartContract;
+            this.DateOfEndContract = contract.DateOfEndContract;
+        }
         #endregion
 
         #region Properties:
@@ -121,7 +147,7 @@ namespace BE
         public bool IntroductoryMeeting { get { return IntroductoryMeeting; }  set { IntroductoryMeeting = value; } }
         public bool ContractSigned { get { return ContractSigned; } set { ContractSigned = value; } }
         public int HourlySalary { get { return HourlySalary; } set { HourlySalary = value; } }
-        public double MonthlySalary { get { return MonthlySalary; } set { MonthlySalary = value; } }
+        public int MonthlySalary { get { return MonthlySalary; } set { MonthlySalary = value; } }
         public SalaryBy HourOrMonth { get { return HourOrMonth; } set { HourOrMonth = value;  } }
         public DateTime DateOfStartContract
         {
